@@ -31,7 +31,8 @@ extern crate clap;
 
 use clap::{Arg, App};
 
-use server::ThreadPool;
+use thread_pool::ThreadPool;
+use protector::SessionProtector;
 
 use std::io::prelude::*;
 use std::net::TcpStream;
