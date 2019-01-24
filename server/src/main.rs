@@ -115,12 +115,17 @@ fn start_server(port: &str, connections_number: usize) {
 }
 
 fn connect_to_server(ip_port: &str) {
-    // TODO: implement method
+    let mut stream = TcpStream::connect(ip_port).unwrap();
+
+    let _ = stream.write(&[1]);
+    let _ = stream.read(&mut [0; 128]);
 }
 
 fn handle_connection(mut stream: TcpStream) {
     let mut buffer = [0; 512];
-    stream.read(&mut buffer).unwrap();
+    let message = stream.read(&mut buffer).unwrap();
+
+    println!("Buffer: {}", message);
 
     let get = b"GET / HTTP/1.1\r\n";
     let sleep = b"GET /sleep HTTP/1.1\r\n";
